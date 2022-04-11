@@ -32,7 +32,7 @@ public class MemberControllerImpl implements MemberController {
 	
 	@Autowired
 	MemberVO memberVO ;
-	//,"/main.do"
+	
 	@RequestMapping(value={"/","/main.do"}, method=RequestMethod.GET)
 	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
@@ -84,7 +84,14 @@ public class MemberControllerImpl implements MemberController {
 		    HttpSession session = request.getSession();
 		    session.setAttribute("member", memberVO);
 		    session.setAttribute("isLogOn", true);
-		    mav.setViewName("redirect:/member/listMembers.do");
+		    String action = (String)session.getAttribute("action");
+		    session.removeAttribute("action");
+		    
+		    if(action != null) {
+		    	mav.setViewName("redirect:"+action);
+		    } else {
+		    	mav.setViewName("redirect:/member/listMembers.do");
+		    }
 	}else {
 		    rAttr.addAttribute("result","loginFailed");
 		    mav.setViewName("redirect:/member/loginForm.do");
@@ -104,13 +111,15 @@ public class MemberControllerImpl implements MemberController {
 	}	
 
 	@RequestMapping(value = "/member/*Form.do", method =  RequestMethod.GET)
-	private ModelAndView form(@RequestParam(value= "result", required=false) String result,
-						       HttpServletRequest request, 
-						       HttpServletResponse response) throws Exception {
-
-		String viewName = (String)request.getAttribute("viewName");
+	public ModelAndView form(@RequestParam(value= "result", required=false) String result,
+			  				@RequestParam(value= "action", required=false) String action,
+			  				HttpServletRequest request, 
+			  				HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		HttpSession session = request.getSession();
+		session.setAttribute("action", action);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("result",result);
+		mav.addObject("result", result);
 		mav.setViewName(viewName);
 		return mav;
 	}

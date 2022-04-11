@@ -15,6 +15,7 @@
 <title>회원 정보 출력창</title>
 </head>
 <body>
+<c:if test="${isLogOn != null }">
 <table border="1"  align="center"  width="80%">
     <tr align="center"   bgcolor="lightgreen">
       <td ><b>아이디</b></td>
@@ -25,7 +26,7 @@
       <td><b>삭제</b></td>
    </tr>
    
- <c:forEach var="member" items="${membersList}" >     
+ <c:forEach var="member" items="${membersList}" >
    <tr align="center">
       <td>${member.id}</td>
       <td>${member.pwd}</td>
@@ -34,8 +35,11 @@
       <td>${member.joinDate}</td>
       <td><a href="${contextPath}/member/removeMember.do?id=${member.id }">삭제하기</a></td>
     </tr>
-  </c:forEach>   
+  </c:forEach>
 </table>
-<a  href="${contextPath}/member/memberForm.do"><h1 style="text-align:center">회원가입</h1></a>
+</c:if>
+<c:if test="${isLogOn == null }">
+<h1>로그인을 진행 해 주세요!</h1>
+</c:if>
 </body>
 </html>

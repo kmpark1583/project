@@ -73,7 +73,6 @@
      </c:when>
     </c:choose>
 </table>
-<!-- <a  class="cls1"  href="#"><p class="cls2">글쓰기</p></a> -->
 <a  class="cls1"  href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do', 
                                                     '${contextPath}/member/loginForm.do')"><p class="cls2">글쓰기</p></a>
 </body>

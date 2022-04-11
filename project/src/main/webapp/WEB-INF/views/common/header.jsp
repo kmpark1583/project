@@ -27,7 +27,6 @@
      </td>
      
      <td>
-       <!-- <a href="#"><h3>로그인</h3></a> -->
        <c:choose>
           <c:when test="${isLogOn == true  && member!= null}">
             <h3>환영합니다. ${member.name }님!</h3>
@@ -35,12 +34,12 @@
           </c:when>
           <c:otherwise>
 	        <a href="${contextPath}/member/loginForm.do"><h3>로그인</h3></a>
+	        <a href="${contextPath}/member/memberForm.do"><h3>회원가입</h3></a>
 	      </c:otherwise>
 	   </c:choose>     
      </td>
   </tr>
 </table>
-
 
 </body>
 </html>

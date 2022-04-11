@@ -20,7 +20,7 @@ public class ArticleVO {
 	
 	
 	public ArticleVO() {
-		System.out.println("ArticleVO ª˝º∫¿⁄");
+		System.out.println("ArticleVO ÏÉùÏÑ±Ïûê");
 	}
 
 	public int getArticleNO() {
@@ -63,6 +63,28 @@ public class ArticleVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+	public String getImageFileName() {
+		try {
+			if (imageFileName != null && imageFileName.length() != 0) {
+				imageFileName = URLDecoder.decode(imageFileName, "UTF-8");
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return imageFileName;
+	}
+
+	public void setImageFileName(String imageFileName) {
+		try {
+			if(imageFileName!= null && imageFileName.length()!=0) {
+				this.imageFileName = URLEncoder.encode(imageFileName,"UTF-8");
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 
 	public String getId() {
@@ -81,7 +103,5 @@ public class ArticleVO {
 		this.writeDate = writeDate;
 	}
 
-
-	
 	
 }
