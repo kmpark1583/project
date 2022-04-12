@@ -17,11 +17,6 @@ public class ArticleVO {
 	private String imageFileName;
 	private String id;
 	private Date  writeDate;
-	
-	
-	public ArticleVO() {
-		System.out.println("ArticleVO 생성자");
-	}
 
 	public int getArticleNO() {
 		return articleNO;
