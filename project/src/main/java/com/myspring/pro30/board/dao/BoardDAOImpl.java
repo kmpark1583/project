@@ -26,9 +26,13 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public int insertNewArticle(Map articleMap) throws DataAccessException {
+		// 새글에 대한 글번호를 가져온다.
 		int articleNO = selectNewArticleNO();
+		// articleMap에 articleNO 라는 이름으로 새글에 대한 글번호를 저장
 		articleMap.put("articleNO", articleNO);
+		// articleMap을 전달하면서 mapper.board의 insertNewArticle문을 호출해서 실행시키도록 함.
 		sqlSession.insert("mapper.board.insertNewArticle",articleMap);
+		// 위에서 받은 새글에 대한 글번호를 리턴해준다.
 		return articleNO;
 	}
 	
